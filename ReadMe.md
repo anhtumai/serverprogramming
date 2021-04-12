@@ -1,3 +1,3 @@
-# Server Programming
+# Bookstore
 
-All the exercises for a Spring Boot course
+My personal project to learn Spring framework
