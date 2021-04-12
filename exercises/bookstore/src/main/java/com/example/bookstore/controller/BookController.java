@@ -1,10 +1,12 @@
 package com.example.bookstore.controller;
 
 import com.example.bookstore.model.Book;
+import com.example.bookstore.model.BookstoreUserDetails;
 import com.example.bookstore.repository.BookRepository;
 import com.example.bookstore.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +37,8 @@ public class BookController {
     @GetMapping("/booklist")
     public String getBooklist(Model model){
         model.addAttribute("books", bookRepository.findAll());
+        model.addAttribute("username", getCurrentUsername());
+        model.addAttribute("title", "Book List");
         return "booklist";
     }
 
@@ -42,6 +46,8 @@ public class BookController {
     public String getAddBook(Model model){
         model.addAttribute("book", new Book());
         model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("username", getCurrentUsername());
+        model.addAttribute("title", "Add Book");
         return "addbook";
     }
 
@@ -62,7 +68,17 @@ public class BookController {
     public String editBook(@PathVariable("id") Long bookId, Model model) {
         model.addAttribute("book", bookRepository.findById(bookId));
         model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("username", getCurrentUsername());
+        model.addAttribute("title", "Edit Book");
         return "editbook";
+    }
+
+    private String getCurrentUsername() {
+        var currentUser = (BookstoreUserDetails) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+        return currentUser.getUsername();
     }
 
 }

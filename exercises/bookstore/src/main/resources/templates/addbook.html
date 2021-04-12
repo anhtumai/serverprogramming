@@ -6,7 +6,7 @@
     <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
-<h1>Add Book</h1>
+<div th:replace="includes/header :: header"></div>
 <div>
     <form th:object="${book}" th:action="@{save}" action="#" method="post">
         <div class="form-group">

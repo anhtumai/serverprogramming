@@ -111,7 +111,7 @@ public class BookRestController {
         String failedReason="";
         if (params.containsKey("year")) {
             try {
-                var year = Integer.parseInt(params.get("year"));
+                Integer.parseInt(params.get("year"));
             } catch (NumberFormatException nfe) {
                 failedReason += "Year should be an integer.\n";
                 valid = false;
@@ -119,7 +119,7 @@ public class BookRestController {
         }
         if (params.containsKey("price")) {
             try {
-                var price = Double.parseDouble(params.get("price"));
+                Double.parseDouble(params.get("price"));
             } catch (NumberFormatException nfe) {
                 failedReason += "Price should be a double.\n";
                 valid = false;

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Books</title>
     <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
-<h1>Books</h1>
+<div th:replace="includes/header :: header"></div>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -27,7 +27,7 @@
             <td th:if="${book.category != null}" th:text="${book.category.name}"></td>
             <td th:if="${book.category == null}" th:text="unknown"></td>
             <td>
-                <a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-success" role="button" aria-pressed="true">Delete</a>
+                <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-success" role="button" aria-pressed="true">Delete</a>
             </td>
             <td>
                 <a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-warning" role="button" aria-pressed="true">Edit</a>

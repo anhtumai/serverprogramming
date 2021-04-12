@@ -2,12 +2,16 @@ package com.example.bookstore;
 
 import com.example.bookstore.model.Book;
 import com.example.bookstore.model.Category;
+import com.example.bookstore.model.User;
 import com.example.bookstore.repository.BookRepository;
 import com.example.bookstore.repository.CategoryRepository;
+import com.example.bookstore.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -46,6 +50,27 @@ public class BookstoreApplication {
 
             bookRepository.save(book1);
             bookRepository.save(book2);
+        };
+    }
+
+
+    @Bean
+    public CommandLineRunner initUsers(UserRepository userRepository, PasswordEncoder passwordEncoder){
+        return (args) -> {
+            var admin = new User(
+                    "tumai",
+                    passwordEncoder.encode("password"),
+                    "ADMIN"
+            );
+
+            var user1 = new User(
+                    "bryan",
+                    passwordEncoder.encode("pass"),
+                    "VISITOR"
+            );
+
+            userRepository.save(admin);
+            userRepository.save(user1);
         };
     }
 
