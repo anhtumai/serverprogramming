@@ -8,46 +8,46 @@
 </head>
 <body>
 <div th:replace="includes/header :: header"></div>
-<div>
+<div class="container">
     <form th:object="${book}" th:action="@{../save}" action="#" method="post">
         <input type="hidden" th:field="*{id}"/>
-        <div class="form-group">
-            <label>Title:
-                <input type="text" th:field="*{title}" th:required="required" class="form-control"/>
-            </label>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="title">Title:</label>
+                <input type="text" th:field="*{title}" th:required="required" class="form-control" id="title"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="author">Author:</label>
+                <input type="text" th:field="*{author}" th:required="required" class="form-control" id="author"/>
+            </div>
         </div>
-        <div class="form-group">
-            <label>Author:
-                <input type="text" th:field="*{author}" th:required="required" class="form-control" />
-            </label>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="isbn">ISBN:</label>
+                <input type="text" th:field="*{isbn}" th:required="required" class="form-control" id="isbn"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="year">Year:</label>
+                <input type="text" th:field="*{year}" th:required="required" class="form-control" id="year"/>
+            </div>
         </div>
-        <div class="form-group">
-            <label>ISBN:
-                <input type="text" th:field="*{isbn}" th:required="required" class="form-control"/>
-            </label>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="price">Price:</label>
+                <input type="text" th:field="*{price}" th:required="required" class="form-control" id="price"/>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="categories">Categories</label>
+                <select id="categories" th:field="*{category}" class="form-control">
+                    <option th:each="category:${categories}"
+                            th:value="${category.id}"
+                            th:text="${category.name}">
+                    </option>
+                </select>
+            </div>
         </div>
-        <div class="form-group">
-            <label>Year:
-                <input type="text" th:field="*{year}" th:required="required" class="form-control"/>
-            </label>
-        </div>
-        <div class="form-group">
-            <label>Price:
-                <input type="text" th:field="*{price}" th:required="required" class="form-control"/>
-            </label>
-        </div>
-        <div class="form-group">
-            <label for="categories">Categories</label>
-            <select id="categories" th:field="*{category}" class="form-control">
-                <option th:each="category:${categories}"
-                        th:value="${category.id}"
-                        th:text="${category.name}">
-                </option>
-            </select>
-        </div>
-
         <div>
-            <input type="submit" value="Edit Book" role="button" class="btn btn-success"/>
+            <input type="submit" value="Add Book" role="button" class="btn btn-success"/>
         </div>
     </form>
 </div>

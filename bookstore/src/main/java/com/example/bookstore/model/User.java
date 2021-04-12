@@ -54,4 +54,9 @@ public class User {
     public void setAuthority(String authority) {
         this.authority = authority;
     }
+
+    @Override
+    public String toString(){
+        return String.format("User %s with authority %s", username, authority);
+    }
 }

@@ -37,7 +37,7 @@ public class BookController {
     @GetMapping("/booklist")
     public String getBooklist(Model model){
         model.addAttribute("books", bookRepository.findAll());
-        model.addAttribute("username", getCurrentUsername());
+        model.addAttribute("username", AuthGetter.getCurrentUsername());
         model.addAttribute("title", "Book List");
         return "booklist";
     }
@@ -46,7 +46,7 @@ public class BookController {
     public String getAddBook(Model model){
         model.addAttribute("book", new Book());
         model.addAttribute("categories", categoryRepository.findAll());
-        model.addAttribute("username", getCurrentUsername());
+        model.addAttribute("username", AuthGetter.getCurrentUsername());
         model.addAttribute("title", "Add Book");
         return "addbook";
     }
@@ -68,17 +68,8 @@ public class BookController {
     public String editBook(@PathVariable("id") Long bookId, Model model) {
         model.addAttribute("book", bookRepository.findById(bookId));
         model.addAttribute("categories", categoryRepository.findAll());
-        model.addAttribute("username", getCurrentUsername());
+        model.addAttribute("username", AuthGetter.getCurrentUsername());
         model.addAttribute("title", "Edit Book");
         return "editbook";
     }
-
-    private String getCurrentUsername() {
-        var currentUser = (BookstoreUserDetails) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-        return currentUser.getUsername();
-    }
-
 }

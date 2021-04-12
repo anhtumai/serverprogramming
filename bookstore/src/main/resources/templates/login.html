@@ -7,10 +7,7 @@
     <link type="text/css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-    <a class="navbar-brand" href="#">Registration</a>
-</nav>
-
+<div th:replace="includes/header :: header"></div>
 <div class="container">
     <h1>Login</h1>
 
@@ -22,20 +19,23 @@
         <p>Log out successfully!</p>
     </div>
 
+    <div class="text-success" th:if="${param.signup}">
+        <p>Create new user successfully!</p>
+    </div>
+
     <div>
         <form action="perform_login" th:action="@{/perform_login}" method="post">
-            <div class="form-group">
-                <label> User Name :
-                    <input type="text" name="username" class="form-control" />
-                </label>
+            <div class="form-group col-md-4">
+                <label for="username">User Name :</label>
+                <input id="username" type="text" name="username" class="form-control" />
             </div>
-            <div class="form-group">
-                <label> Password:
-                    <input type="password" name="password" class="form-control" />
-                </label>
+            <div class="form-group col-md-4">
+                <label for="password">Password:</label>
+                <input id="password" type="password" name="password" class="form-control" />
             </div>
-            <div>
+            <div class="col-md-4">
                 <input type="submit" class="btn btn-primary" role="button" value="Login"/>
+                <a class="btn btn-primary" href="signup">Sign up</a>
             </div>
         </form>
     </div>
