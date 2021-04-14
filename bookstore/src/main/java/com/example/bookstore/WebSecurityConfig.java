@@ -26,15 +26,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .mvcMatchers("/login*").permitAll()
-                .mvcMatchers("/css/**").permitAll()
+                .mvcMatchers("/css/**","/js/**").permitAll()
                 .mvcMatchers("/signup*").permitAll()
-                .mvcMatchers("/perform_signup").permitAll()
+                .mvcMatchers("/perform*").permitAll()
                 .anyRequest().authenticated()
 
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .loginProcessingUrl("/perform_login")
+                .loginProcessingUrl("/login")
                 .permitAll()
                 .defaultSuccessUrl("/booklist", true)
 

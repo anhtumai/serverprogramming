@@ -1,5 +1,8 @@
 package com.example.bookstore.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,13 +14,18 @@ public class User {
     private Long id;
 
     private String username;
-    private String password;
+
+    @Column(length = 60)
+    private String password; // this is hashed password
+
+    private String email;
 
     private String authority;
 
-    public User(String username, String password, String authority) {
+    public User(String username, String password, String email, String authority) {
         this.username = username;
         this.password = password;
+        this.email = email;
         this.authority = authority;
     }
 
@@ -47,6 +55,14 @@ public class User {
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getAuthority() {
         return authority;
     }
@@ -58,5 +74,9 @@ public class User {
     @Override
     public String toString(){
         return String.format("User %s with authority %s", username, authority);
+    }
+
+    public void encode(PasswordEncoder passwordEncoder) {
+        password = passwordEncoder.encode(password);
     }
 }

@@ -11,6 +11,9 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item" th:if="${username.isPresent()}" >
+                    <a class="nav-link" href="#" th:text="'Profile'"></a>
+                </li>
+                <li class="nav-item" th:if="${username.isPresent()}" >
                     <a class="nav-link" href="#" th:text="'Logged in as ' + ${username.get()}"></a>
                 </li>
                 <li class="nav-item" th:if="${username.isEmpty()}" >

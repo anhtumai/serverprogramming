@@ -60,12 +60,14 @@ public class BookstoreApplication {
             var admin = new User(
                     "tumai",
                     passwordEncoder.encode("password"),
+                    "tu.mai@outlook.com",
                     "ADMIN"
             );
 
             var user1 = new User(
                     "bryan",
                     passwordEncoder.encode("pass"),
+                    "bryan68@gmail.com",
                     "VISITOR"
             );
 
