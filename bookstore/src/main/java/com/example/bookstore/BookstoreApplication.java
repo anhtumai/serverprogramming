@@ -59,17 +59,19 @@ public class BookstoreApplication {
         return (args) -> {
             var admin = new User(
                     "tumai",
-                    passwordEncoder.encode("password"),
+                    "password",
                     "tu.mai@outlook.com",
                     "ADMIN"
             );
+            admin.encode(passwordEncoder);
 
             var user1 = new User(
                     "bryan",
-                    passwordEncoder.encode("pass"),
-                    "bryan68@gmail.com",
+                    "pass",
+                    "bryan69@gmail.com",
                     "VISITOR"
             );
+            user1.encode(passwordEncoder);
 
             userRepository.save(admin);
             userRepository.save(user1);

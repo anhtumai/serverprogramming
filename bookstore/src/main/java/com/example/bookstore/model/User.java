@@ -1,6 +1,5 @@
 package com.example.bookstore.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
@@ -15,16 +14,19 @@ public class User {
 
     private String username;
 
+    @Transient
+    private String rawPassword;
+
     @Column(length = 60)
-    private String password; // this is hashed password
+    private String password; // hashed password
 
     private String email;
 
     private String authority;
 
-    public User(String username, String password, String email, String authority) {
+    public User(String username, String rawPassword, String email, String authority) {
         this.username = username;
-        this.password = password;
+        this.rawPassword = rawPassword;
         this.email = email;
         this.authority = authority;
     }
@@ -71,12 +73,20 @@ public class User {
         this.authority = authority;
     }
 
+    public String getRawPassword() {
+        return rawPassword;
+    }
+
+    public void setRawPassword(String rawPassword) {
+        this.rawPassword = rawPassword;
+    }
+
     @Override
     public String toString(){
         return String.format("User %s with authority %s", username, authority);
     }
 
     public void encode(PasswordEncoder passwordEncoder) {
-        password = passwordEncoder.encode(password);
+        password = passwordEncoder.encode(rawPassword);
     }
 }
